@@ -28,11 +28,47 @@
             android:name="com.gpa.add_subject"
             android:parentActivityName="com.gpa.add_semster"
 
-            android:label="Add Contact">
+            android:label="Add Subject">
 
 
         </activity>
 
+
+        <activity
+            android:name="com.gpa.edit_subject"
+            android:parentActivityName="com.gpa.details"
+
+            android:label="Edit Subject">
+
+
+        </activity>
+
+        <activity
+            android:name="com.gpa.add_visitor"
+            android:parentActivityName="com.gpa.visitorsActivity"
+
+            android:label="Add Visitor">
+
+
+
+        </activity>
+
+        <activity
+            android:name="com.gpa.visitorsActivity"
+            android:parentActivityName="com.gpa.MainActivity"
+
+            android:label="Visitors">
+
+        </activity>
+
+        <activity
+            android:name="com.gpa.details"
+            android:parentActivityName="com.gpa.MainActivity"
+
+            android:label="Add Subject">
+
+
+        </activity>
 
         <activity android:name="com.gpa.login" >
 

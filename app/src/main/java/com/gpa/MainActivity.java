@@ -62,9 +62,38 @@ public class MainActivity extends AppCompatActivity {
         final Cursor cursor = db.query(mDbHelper.SEMSTER_TABLE_NAME, column, null, null ,null, null, null);
         final SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.list_entry, cursor, from, to, 0);
 
+
+        adapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
+            @Override
+            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+                if (view.getId() == R.id.gpa_textview) {
+                    int getIndex = cursor.getColumnIndex("gpa");
+                    Float gpa = cursor.getFloat(getIndex);
+                    TextView gpaTextView = (TextView) view;
+                    String s = String.format("%.2f", gpa);
+                    gpaTextView.setText(s);
+                    return true;
+                }
+                return false;
+            }
+        });
         list.setAdapter(adapter);
 
 
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            public void onItemClick(AdapterView<?> listView, View view, int position,
+                                    long id){
+                Cursor cursor = ((SimpleCursorAdapter)list.getAdapter()).getCursor();
+                cursor.moveToPosition(position);
+                String name = cursor.getString(cursor.getColumnIndex("name"));
+
+                Intent startDayActivity = new Intent(MainActivity.this, details.class);
+                startDayActivity.putExtra("name", name);
+                startActivity(startDayActivity);
+            }
+
+        });
 
 
 
@@ -131,6 +160,16 @@ public class MainActivity extends AppCompatActivity {
                return true;
 
 
+            case R.id.visitors:
+
+
+                Intent intent = new Intent(MainActivity.this, visitorsActivity.class);
+               startActivity(intent);
+
+
+                return true;
+
+
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -173,7 +212,10 @@ public class MainActivity extends AppCompatActivity {
             float gpa= sum/semster_num;
                 Cumulative_GPA.setVisibility(View.VISIBLE);
 
-                Cumulative_GPA.setText("Cumulative GPA: "+gpa+"");
+
+                String s = String.format("%.2f", gpa);
+
+                Cumulative_GPA.setText("Cumulative GPA: "+s+"");
 
 
 

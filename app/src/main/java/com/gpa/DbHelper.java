@@ -14,6 +14,14 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "gpa";
 
 
+    // visitor table
+
+    public static final String visitor_TABLE_NAME = "visitor";
+    public static final String visitor_id = "_id";
+    public static final String visitor_name = "name";
+    public static final String visitor_phone = "phone";
+
+
 
     // semster table
 
@@ -56,8 +64,13 @@ public class DbHelper extends SQLiteOpenHelper {
             + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_NAME + " TEXT,"
             + COLUMN_USER_EMAIL + " TEXT," + COLUMN_USER_PASSWORD + " TEXT" + ")";
 
-    // drop table sql query
-    private String DROP_USER_TABLE = "DROP TABLE IF EXISTS " + TABLE_USER;
+
+
+    // create table sql query
+    private String CREATE_VISITOR_TABLE = "CREATE TABLE " + visitor_TABLE_NAME + "("
+            + visitor_id + " INTEGER PRIMARY KEY AUTOINCREMENT," + visitor_name + " TEXT,"
+            + visitor_phone + " TEXT)";
+
 
 
 
@@ -88,6 +101,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
             db.execSQL(CREATE_SEMSTER);
             db.execSQL(CREATE_SUBJECT);
+            db.execSQL(CREATE_VISITOR_TABLE);
 
 
 
